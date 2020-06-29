@@ -123,15 +123,17 @@
 	<script>
 
 		duongdan = '<?php echo base_url() ?>';
-		$('#anhavatar').fileupload({
-			dataType:'json',
-			url: duongdan + 'index.php/nhansu/uploadfile',
-			done: function(e,data){
-				$.each(function(index, el) {
-					
-				});
-			}
-		})
+		
+
+	$('#anhavatar').fileupload({
+        url: duongdan + 'index.php/nhansu/uploadfile',
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                tenfile = file.url;
+            });
+        }
+    })
 
 		$('.nutxulyajax').click(function(event) {
 			/* Act on the event */
@@ -140,10 +142,10 @@
 			type: 'POST',
 			dataType: 'json',
 			data: {
-				
 				ten: $('#ten').val(),
 				tuoi: $('#tuoi').val(),
 				sdt: $('#sdt').val(),
+				anhavatar: tenfile,
 				linkfb: $('#linkfb').val(),
 				sodonhang: $('#sodonhang').val()				
 			},
@@ -161,7 +163,7 @@
 			console.log("complete");
 			noidung = '<div class="col-sm-4">';
 			noidung +='<div class="card">';
-			noidung +='<img style="width: 100%;height: 350px" src="http://localhost:8001/quanlynhansu/file_upload/c.jpg" class="card-img-top img-fluid" alt="...">';
+			noidung +='<img style="width: 100%;height: 350px" src="'+tenfile+'" class="card-img-top img-fluid" alt="...">';
 			noidung +=	    '<div class="card-body">'
 			noidung +=	      '<h5 class="card-title ten">' + $('#ten').val() + '</h5>';
 			noidung +=	      '<p class="card-text tuoi">Tuổi:' + $('#tuoi').val() + '</p>';

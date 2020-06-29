@@ -199,7 +199,7 @@ class nhansu extends CI_Controller {
 		$sodonhang = $this->input->post('sodonhang');
 		$linkfb = $this->input->post('linkfb');
 		$sdt = $this->input->post('sdt');
-		$anhavatar = 'http://localhost:8001/quanlynhansu/file_upload/c.jpg';
+		$anhavatar = $this->input->post('anhavatar');
 		//$anhavatar = base_url()."file_upload/". basename($_FILES["anhavatar"]["name"]);
 
 		// gọi model
